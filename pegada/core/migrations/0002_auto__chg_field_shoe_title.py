@@ -8,36 +8,14 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'AppUser'
-        db.create_table(u'core_appuser', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
-            ('shoe_size', self.gf('django.db.models.fields.CharField')(max_length=3, null=True, blank=True)),
-            ('foot', self.gf('django.db.models.fields.CharField')(max_length=1)),
-            ('state', self.gf('django.db.models.fields.CharField')(max_length=2)),
-            ('city', self.gf('django.db.models.fields.CharField')(max_length=20)),
-            ('phone_number', self.gf('django.db.models.fields.CharField')(max_length=15, null=True, blank=True)),
-        ))
-        db.send_create_signal(u'core', ['AppUser'])
 
-        # Adding model 'Shoe'
-        db.create_table(u'core_shoe', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=3)),
-            ('size', self.gf('django.db.models.fields.CharField')(max_length=3, null=True, blank=True)),
-            ('foot', self.gf('django.db.models.fields.CharField')(max_length=1)),
-            ('app_user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.AppUser'])),
-        ))
-        db.send_create_signal(u'core', ['Shoe'])
-
+        # Changing field 'Shoe.title'
+        db.alter_column(u'core_shoe', 'title', self.gf('django.db.models.fields.CharField')(max_length=40))
 
     def backwards(self, orm):
-        # Deleting model 'AppUser'
-        db.delete_table(u'core_appuser')
 
-        # Deleting model 'Shoe'
-        db.delete_table(u'core_shoe')
-
+        # Changing field 'Shoe.title'
+        db.alter_column(u'core_shoe', 'title', self.gf('django.db.models.fields.CharField')(max_length=3))
 
     models = {
         u'auth.group': {
@@ -92,7 +70,7 @@ class Migration(SchemaMigration):
             'foot': ('django.db.models.fields.CharField', [], {'max_length': '1'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'size': ('django.db.models.fields.CharField', [], {'max_length': '3', 'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '3'})
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '40'})
         }
     }
 
